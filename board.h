@@ -30,7 +30,7 @@ class Board {
   
     // Each move in the vector is in the order {gemType, source, destination}
     bool isMoveValid(const std::vector<Move>) const;
-    void move(const std::vector<Move>);
+    void doMoves(const std::vector<Move>);
 
     void setSphere(const Element, const Sphere);
     Sphere getSphere(const Element) const;

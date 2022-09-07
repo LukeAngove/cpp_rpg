@@ -3,12 +3,12 @@
 #include "movemap.h"
 
 MoveMap::MoveMap(std::vector<Move> moves) {
-  for (auto element : ELEMENTLIST) {
-    _inputs.insert({element, {}});
-    _outputs.insert({element, {}});
-    for (auto element2 : ELEMENTLIST) {
-      _inputs.at(element).insert({element2, 0});
-      _outputs.at(element).insert({element2, 0});
+  for (auto sphereType : ELEMENTLIST) {
+    _inputs.insert({sphereType, {}});
+    _outputs.insert({sphereType, {}});
+    for (auto gemType : ELEMENTLIST) {
+      _inputs.at(sphereType).insert({gemType, 0});
+      _outputs.at(sphereType).insert({gemType, 0});
     }
   }
 
