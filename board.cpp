@@ -38,27 +38,27 @@ int Board::count(const int sphereType, const int gemType) const {
   return count;
 }
 
-bool Board::isMoveValid(const std::vector<std::tuple<Element, Element, Element>> moves) const {
+bool Board::isMoveValid(const std::vector<Move> moves) const {
 
-  MoveMap moveMap(moves);
-  for (auto element : ELEMENTLIST) {
-    for (auto element2 : ELEMENTLIST) {
-      if (moveMap.inputCount(element, element2) > count(element, element2)) {
-        return false;
-      }
-    }
-  }
+   MoveMap moveMap(moves);
+   for (auto element : ELEMENTLIST) {
+     for (auto element2 : ELEMENTLIST) {
+       if (moveMap.inputCount(element, element2) > count(element, element2)) {
+         return false;
+       }
+     }
+   }
   
   return true;
 }
 
-void Board::move(std::vector<std::tuple<Element, Element, Element>> moves) {
+void Board::doMoves(std::vector<Move> moves) {
   MoveMap moveMap(moves);
-  for (auto element : ELEMENTLIST) {
-    for (auto element2 : ELEMENTLIST) {
-      int newNumGems = count(element, element2) - moveMap.inputCount(element, element2);
-      newNumGems = newNumGems + moveMap.outputCount(element, element2);
-      _spheres.at(element).at(element2) = newNumGems;
+  for (auto sphere : ELEMENTLIST) {
+    for (auto gemType : ELEMENTLIST) {
+      int newNumGems = count(sphere, gemType) - moveMap.inputCount(sphere, gemType);
+      newNumGems = newNumGems + moveMap.outputCount(sphere, gemType);
+      _spheres.at(sphere).at(gemType) = newNumGems;
     }
   } 
 }
