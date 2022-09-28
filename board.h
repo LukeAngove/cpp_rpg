@@ -10,7 +10,7 @@
 #include "move.h"
 
 /**
- * Represents a game board containing spheres.
+ * Represents a game board containing spheres (see 'sphere.h').
  * Has functionality to allow access to spheres, as well as the
  * ability to move gems between spheres.
  * 

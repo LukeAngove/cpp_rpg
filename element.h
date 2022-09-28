@@ -4,8 +4,9 @@
 #include <vector>
 
 /**
- * Contains the elements used, as well as any
- * categories of elements.
+ * Element defines constants for each of the 
+ * 5 elements, as well as constants for common
+ * combinations of these elements.
  * 
  * Elements have bit values to allow for easy 
  * use of multiple elements through bitwise 
@@ -24,7 +25,6 @@ enum Element {
 // contains all elements being used in the game.
 const std::vector<Element> ELEMENTLIST = {Element::FIRE, Element::WATER, Element::LIGHTNING, Element::EARTH, Element::SPIRIT};
 
-// checks if an element is in a given search mask.
 bool elementInSearch(const Element, const int searchMask);
 
 #endif

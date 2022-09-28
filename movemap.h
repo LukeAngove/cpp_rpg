@@ -17,6 +17,8 @@
  * and values containing map of each gem type and the number of those gems involved
  * in the move.
  * 
+ * WHY??????
+ * 
  */
 class MoveMap {
   public:
