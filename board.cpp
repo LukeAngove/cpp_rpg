@@ -40,14 +40,14 @@ int Board::count(const int sphereType, const int gemType) const {
 
 bool Board::isMoveValid(const std::vector<Move> moves) const {
 
-   MoveMap moveMap(moves);
-   for (auto element : ELEMENTLIST) {
-     for (auto element2 : ELEMENTLIST) {
-       if (moveMap.inputCount(element, element2) > count(element, element2)) {
-         return false;
-       }
-     }
-   }
+  MoveMap moveMap(moves);
+  for (auto element : ELEMENTLIST) {
+    for (auto element2 : ELEMENTLIST) {
+      if (moveMap.inputCount(element, element2) > count(element, element2)) {
+        return false;
+      }
+    }
+  }
   
   return true;
 }
