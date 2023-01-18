@@ -1,3 +1,5 @@
+load("@rules_proto_grpc//cpp:defs.bzl", "cpp_proto_compile")
+
 cc_library(
   name = "board",
   srcs = [
@@ -33,4 +35,14 @@ cc_test(
     "@com_google_googletest//:gtest_main",
     ":board",
   ],
+)
+
+proto_library(
+    name = "test_proto",
+    srcs = ["test.proto"],
+)
+
+cpp_proto_compile(
+    name = "test_cc_proto",
+    protos = [":test_proto"],
 )
