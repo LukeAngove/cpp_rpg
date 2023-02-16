@@ -1,4 +1,4 @@
-load("@rules_proto_grpc//cpp:defs.bzl", "cpp_proto_compile")
+load("@rules_proto_grpc//cpp:defs.bzl", "cpp_grpc_library")
 
 cc_library(
   name = "board",
@@ -52,7 +52,7 @@ proto_library(
     srcs = ["test.proto"],
 )
 
-cpp_proto_compile(
+cpp_grpc_library(
     name = "test_cc_proto",
     protos = [":test_proto"],
 )
@@ -64,5 +64,21 @@ cc_test(
   deps = [
     "@com_google_googletest//:gtest_main",
     ":api",
+  ],
+)
+
+cc_binary(
+  name = "grpctestclass",
+  srcs = ["grpctestclass.cpp"],
+  deps = [
+    ":test_cc_proto",
+  ],
+)
+
+cc_binary (
+  name = "grpctestclient",
+  srcs = ["grpctestclient.cpp"],
+  deps = [
+    ":test_cc_proto"
   ],
 )
