@@ -7,11 +7,11 @@
 using grpc::ServerContext;
 using grpc::Status;
 
-class TestServiceImpl final : public TestService::Service {
-  Status TestProto(ServerContext* context, const Test* request,
-                       Test* reply) override {
-    reply->set_testbool(true);
-    std::cout << "Client interacted with server" << std::endl;
+class TestServiceImpl final : public PlayerService::Service {
+  Status UseAbility(ServerContext* context, const AbilityID* request,
+                       Success* reply) override {
+    reply->set_success(true);
+    std::cout << "Client interacted with server" << request->id() << std::endl;
     return Status::OK;
   }
 };

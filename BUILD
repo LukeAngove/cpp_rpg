@@ -27,6 +27,18 @@ cc_library(
   ],
 )
 
+cc_library(
+  name = "grpcapiclient",
+  srcs = [
+    "grpctestclient.cpp",
+  ],
+  hdrs = [
+    "grpctestclient.h",
+  ],
+  deps = [
+    ":test_cc_proto",
+  ],
+)
 cc_test(
   name = "hello_test",
   size = "small",
@@ -77,8 +89,8 @@ cc_binary(
 
 cc_binary (
   name = "grpctestclient",
-  srcs = ["grpctestclient.cpp"],
+  srcs = ["grpctestclientexe.cpp",],
   deps = [
-    ":test_cc_proto"
+    ":grpcapiclient",
   ],
 )

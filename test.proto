@@ -1,9 +1,13 @@
 syntax = "proto3";
 
-service TestService {
-  rpc TestProto (Test) returns (Test) {}
+service PlayerService {
+  rpc UseAbility (AbilityID) returns (Success) {}
 }
 
-message Test {
-  optional bool testBool = 1;
+message AbilityID {
+  int64 id = 1;
+}
+
+message Success {
+  bool success = 1;
 }
