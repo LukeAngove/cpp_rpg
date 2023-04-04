@@ -7,18 +7,18 @@
 using grpc::ServerContext;
 using grpc::Status;
 
-class TestServiceImpl final : public PlayerService::Service {
-  Status UseAbility(ServerContext* context, const AbilityID* request,
+class PlayerServiceImpl final : public PlayerService::Service {
+  Status UseAbility(ServerContext* context, const AbilityID* id,
                        Success* reply) override {
     reply->set_success(true);
-    std::cout << "Client interacted with server" << request->id() << std::endl;
+    std::cout << "Client interacted with server" << id->id() << std::endl;
     return Status::OK;
   }
 };
 
-void RunServer() {
+std::tuple<std::unique_ptr<grpc::Server>, std::unique_ptr<grpc::Service>> RunServer() {
   std::string server_address("0.0.0.0:50051");
-  TestServiceImpl service;
+  auto service = std::make_unique<PlayerServiceImpl>();
 
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
@@ -27,18 +27,20 @@ void RunServer() {
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
   // Register "service" as the instance through which we'll communicate with
   // clients. In this case it corresponds to an *synchronous* service.
-  builder.RegisterService(&service);
+  builder.RegisterService(service.get());
   // Finally assemble the server.
-  std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
+  auto server = builder.BuildAndStart();
   std::cout << "Server listening on " << server_address << std::endl;
 
   // Wait for the server to shutdown. Note that some other thread must be
   // responsible for shutting down the server for this call to ever return.
-  server->Wait();
+  return std::make_tuple(std::move(server), std::move(service));
 }
 
 int main(int argc, char** argv) {
-  RunServer();
+  auto server = RunServer();
+
+  std::get<std::unique_ptr<grpc::Server>>(server)->Wait();
 
   return 0;
 }
