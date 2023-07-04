@@ -1,19 +1,20 @@
-#include <gtest/gtest.h>
-#include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/grpcpp.h>
+#include <grpcpp/impl/codegen/service_type.h>
+#include <gtest/gtest.h>
 
 #include "apiclient.h"
 #include "apiserver.h"
 
 class GRPCTest : public ::testing::Test {
- public:
-  GRPCTest() :
-    client(grpc::CreateChannel("0.0.0.0:50051", grpc::InsecureChannelCredentials())) {
+public:
+  GRPCTest()
+      : client(grpc::CreateChannel("0.0.0.0:50051",
+                                   grpc::InsecureChannelCredentials())) {
     std::tie(server, service) = RunServer();
   }
- protected:
-  void SetUp() override {
-  }
+
+protected:
+  void SetUp() override {}
 
   void TearDown() override {}
 
@@ -21,7 +22,6 @@ class GRPCTest : public ::testing::Test {
   std::unique_ptr<grpc::Service> service;
   APIClient client;
 };
-
 
 TEST_F(GRPCTest, useAbilitySuccess) {
   bool expectedResult = true;

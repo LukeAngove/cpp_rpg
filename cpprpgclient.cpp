@@ -2,7 +2,7 @@
 
 #include "apiclient.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   std::string target_str;
   std::string arg_str("--target");
   if (argc > 1) {

@@ -3,7 +3,7 @@
 
 #include "apiserver.h"
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   auto server = RunServer();
 
   std::get<std::unique_ptr<grpc::Server>>(server)->Wait();

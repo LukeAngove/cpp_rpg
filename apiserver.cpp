@@ -1,23 +1,24 @@
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
-#include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/grpcpp.h>
+#include <grpcpp/health_check_service_interface.h>
 
+#include "api.h"
 #include "apiserver.h"
 #include "test.grpc.pb.h"
-#include "api.h"
 
 using grpc::ServerContext;
 using grpc::Status;
 
 class PlayerServiceImpl final : public PlayerService::Service {
-  Status UseAbility(ServerContext* context, const AbilityID* id,
-                       Success* reply) override {
+  Status UseAbility(ServerContext *context, const AbilityID *id,
+                    Success *reply) override {
     reply->set_success(useAbility(id->id()));
     return Status::OK;
   }
 };
 
-std::tuple<std::unique_ptr<grpc::Server>, std::unique_ptr<grpc::Service>> RunServer() {
+std::tuple<std::unique_ptr<grpc::Server>, std::unique_ptr<grpc::Service>>
+RunServer() {
   std::string server_address("0.0.0.0:50051");
   auto service = std::make_unique<PlayerServiceImpl>();
 

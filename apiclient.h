@@ -3,18 +3,17 @@
 
 #include <memory>
 
-#include <grpcpp/grpcpp.h>
 #include "test.grpc.pb.h"
+#include <grpcpp/grpcpp.h>
 
 class APIClient {
-  public:
+public:
   APIClient(std::shared_ptr<grpc::Channel> channel);
 
   bool useAbility(const int abilityID);
 
-  private:
+private:
   std::unique_ptr<PlayerService::Stub> _stub;
-
 };
 
 #endif
