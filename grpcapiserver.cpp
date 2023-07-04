@@ -2,7 +2,9 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/grpcpp.h>
 
+#include "grpcapiserver.h"
 #include "test.grpc.pb.h"
+#include "api.h"
 
 using grpc::ServerContext;
 using grpc::Status;
@@ -10,8 +12,7 @@ using grpc::Status;
 class PlayerServiceImpl final : public PlayerService::Service {
   Status UseAbility(ServerContext* context, const AbilityID* id,
                        Success* reply) override {
-    reply->set_success(true);
-    std::cout << "Client interacted with server" << id->id() << std::endl;
+    reply->set_success(useAbility(id->id()));
     return Status::OK;
   }
 };
@@ -30,17 +31,8 @@ std::tuple<std::unique_ptr<grpc::Server>, std::unique_ptr<grpc::Service>> RunSer
   builder.RegisterService(service.get());
   // Finally assemble the server.
   auto server = builder.BuildAndStart();
-  std::cout << "Server listening on " << server_address << std::endl;
 
   // Wait for the server to shutdown. Note that some other thread must be
   // responsible for shutting down the server for this call to ever return.
   return std::make_tuple(std::move(server), std::move(service));
-}
-
-int main(int argc, char** argv) {
-  auto server = RunServer();
-
-  std::get<std::unique_ptr<grpc::Server>>(server)->Wait();
-
-  return 0;
 }

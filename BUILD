@@ -80,10 +80,24 @@ cc_test(
 )
 
 cc_binary(
-  name = "grpctestclass",
-  srcs = ["grpctestclass.cpp"],
+  name = "grpcapiserverexe",
+  srcs = ["grpcapiserverexe.cpp"],
+  deps = [
+    ":grpcapiserver",
+  ],
+)
+
+cc_library(
+  name = "grpcapiserver",
+  srcs = [
+    "grpcapiserver.cpp",
+  ],
+  hdrs = [
+    "grpcapiserver.h",
+  ],
   deps = [
     ":test_cc_proto",
+    ":api",
   ],
 )
 
@@ -93,4 +107,15 @@ cc_binary (
   deps = [
     ":grpcapiclient",
   ],
+)
+
+cc_test(
+  name = "grpctest",
+  size = "small",
+  srcs = ["grpctest.cpp",],
+  deps = [
+    ":grpcapiclient",
+    ":grpcapiserver",
+    "@com_google_googletest//:gtest_main",
+  ]
 )
