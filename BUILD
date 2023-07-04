@@ -28,12 +28,12 @@ cc_library(
 )
 
 cc_library(
-  name = "grpcapiclient",
+  name = "apiclient",
   srcs = [
-    "grpctestclient.cpp",
+    "apiclient.cpp",
   ],
   hdrs = [
-    "grpctestclient.h",
+    "apiclient.h",
   ],
   deps = [
     ":test_cc_proto",
@@ -80,20 +80,20 @@ cc_test(
 )
 
 cc_binary(
-  name = "grpcapiserverexe",
-  srcs = ["grpcapiserverexe.cpp"],
+  name = "cpprpgserver",
+  srcs = ["cpprpgserver.cpp"],
   deps = [
-    ":grpcapiserver",
+    ":apiserver",
   ],
 )
 
 cc_library(
-  name = "grpcapiserver",
+  name = "apiserver",
   srcs = [
-    "grpcapiserver.cpp",
+    "apiserver.cpp",
   ],
   hdrs = [
-    "grpcapiserver.h",
+    "apiserver.h",
   ],
   deps = [
     ":test_cc_proto",
@@ -102,10 +102,10 @@ cc_library(
 )
 
 cc_binary (
-  name = "grpctestclient",
-  srcs = ["grpctestclientexe.cpp",],
+  name = "cpprpgclient",
+  srcs = ["cpprpgclient.cpp",],
   deps = [
-    ":grpcapiclient",
+    ":apiclient",
   ],
 )
 
@@ -114,8 +114,8 @@ cc_test(
   size = "small",
   srcs = ["grpctest.cpp",],
   deps = [
-    ":grpcapiclient",
-    ":grpcapiserver",
+    ":apiclient",
+    ":apiserver",
     "@com_google_googletest//:gtest_main",
   ]
 )

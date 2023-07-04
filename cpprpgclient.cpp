@@ -1,6 +1,6 @@
 #include <grpcpp/grpcpp.h>
 
-#include "grpctestclient.h"
+#include "apiclient.h"
 
 int main(int argc, char** argv) {
   std::string target_str;
@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
   } else {
     target_str = "0.0.0.0:50051";
   }
-  TestClient testservice(
+  APIClient testservice(
       grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials()));
   int testValue = 1;
   bool reply = testservice.useAbility(testValue);

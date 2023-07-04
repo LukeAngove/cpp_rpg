@@ -1,5 +1,5 @@
-#ifndef GRPCAPISERVER_H
-#define GRPCAPISERVER_H
+#ifndef APISERVER_H
+#define APISERVER_H
 
 #include <tuple>
 #include <memory>

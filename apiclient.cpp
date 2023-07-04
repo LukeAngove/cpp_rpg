@@ -1,12 +1,12 @@
 #include <grpcpp/grpcpp.h>
 
 #include "test.grpc.pb.h"
-#include "grpctestclient.h"
+#include "apiclient.h"
 
-TestClient::TestClient(std::shared_ptr<grpc::Channel> channel)
+APIClient::APIClient(std::shared_ptr<grpc::Channel> channel)
       : _stub(PlayerService::NewStub(channel)) {}
 
-bool TestClient::useAbility(const int abilityID) {
+bool APIClient::useAbility(const int abilityID) {
     // Data we are sending to the server.
     AbilityID id;
     id.set_id(abilityID);

@@ -2,7 +2,7 @@
 #include <grpcpp/health_check_service_interface.h>
 #include <grpcpp/grpcpp.h>
 
-#include "grpcapiserver.h"
+#include "apiserver.h"
 #include "test.grpc.pb.h"
 #include "api.h"
 

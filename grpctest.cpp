@@ -2,8 +2,8 @@
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/grpcpp.h>
 
-#include "grpctestclient.h"
-#include "grpcapiserver.h"
+#include "apiclient.h"
+#include "apiserver.h"
 
 class GRPCTest : public ::testing::Test {
  public:
@@ -19,7 +19,7 @@ class GRPCTest : public ::testing::Test {
 
   std::unique_ptr<grpc::Server> server;
   std::unique_ptr<grpc::Service> service;
-  TestClient client;
+  APIClient client;
 };
 
 
