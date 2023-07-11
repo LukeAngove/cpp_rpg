@@ -4,7 +4,7 @@
 
 #include "api.h"
 #include "apiserver.h"
-#include "test.grpc.pb.h"
+#include "cpprpg.grpc.pb.h"
 
 using grpc::ServerContext;
 using grpc::Status;

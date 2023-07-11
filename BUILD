@@ -36,7 +36,7 @@ cc_library(
     "apiclient.h",
   ],
   deps = [
-    ":test_cc_proto",
+    ":cpprpg_cc_proto",
   ],
 )
 cc_test(
@@ -60,13 +60,13 @@ cc_test(
 )
 
 proto_library(
-    name = "test_proto",
-    srcs = ["test.proto"],
+    name = "cpprpg_proto",
+    srcs = ["cpprpg.proto"],
 )
 
 cpp_grpc_library(
-    name = "test_cc_proto",
-    protos = [":test_proto"],
+    name = "cpprpg_cc_proto",
+    protos = [":cpprpg_proto"],
 )
 
 cc_test(
@@ -96,7 +96,7 @@ cc_library(
     "apiserver.h",
   ],
   deps = [
-    ":test_cc_proto",
+    ":cpprpg_cc_proto",
     ":api",
   ],
 )

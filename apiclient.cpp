@@ -1,7 +1,7 @@
 #include <grpcpp/grpcpp.h>
 
 #include "apiclient.h"
-#include "test.grpc.pb.h"
+#include "cpprpg.grpc.pb.h"
 
 APIClient::APIClient(std::shared_ptr<grpc::Channel> channel)
     : _stub(PlayerService::NewStub(channel)) {}

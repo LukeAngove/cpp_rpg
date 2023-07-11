@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "test.grpc.pb.h"
+#include "cpprpg.grpc.pb.h"
 #include <grpcpp/grpcpp.h>
 
 class APIClient {
