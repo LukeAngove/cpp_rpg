@@ -39,6 +39,7 @@ cc_library(
     ":cpprpg_cc_proto",
   ],
 )
+
 cc_test(
   name = "hello_test",
   size = "small",
