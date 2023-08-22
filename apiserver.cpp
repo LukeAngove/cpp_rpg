@@ -19,17 +19,23 @@ class PlayerServiceImpl final : public PlayerService::Service {
 
 std::tuple<std::unique_ptr<grpc::Server>, std::unique_ptr<grpc::Service>>
 RunServer() {
+  // Set up generic gRPC server on all interfaces
   std::string server_address("0.0.0.0:50051");
-  auto service = std::make_unique<PlayerServiceImpl>();
-
+  
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
   grpc::ServerBuilder builder;
+
   // Listen on the given address without any authentication mechanism.
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+
+  // Create service to be hosted by server
+  auto service = std::make_unique<PlayerServiceImpl>();
+
   // Register "service" as the instance through which we'll communicate with
-  // clients. In this case it corresponds to an *synchronous* service.
+  // clients. In this case it corresponds to a *synchronous* service.
   builder.RegisterService(service.get());
+
   // Finally assemble the server.
   auto server = builder.BuildAndStart();
 

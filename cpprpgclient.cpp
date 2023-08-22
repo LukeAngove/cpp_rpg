@@ -2,9 +2,11 @@
 
 #include "apiclient.h"
 
-int main(int argc, char **argv) {
+std::string parseTargetAddress(int argc, char **argv) {
   std::string target_str;
   std::string arg_str("--target");
+
+  // Read target string from command line if present
   if (argc > 1) {
     std::string arg_val = argv[1];
     size_t start_pos = arg_val.find(arg_str);
@@ -21,14 +23,24 @@ int main(int argc, char **argv) {
       std::cout << "The only acceptable argument is --target=" << std::endl;
       return 0;
     }
-  } else {
+  } else { // Otherwise, use default
     target_str = "0.0.0.0:50051";
   }
+
+  return target_str;
+}
+
+int main(int argc, char **argv) {
+
+  std::string target_str = parseTargetAddress(argc, argv);
+
   APIClient testservice(
       grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials()));
+
+  // Placeholder for actions to be performed by player
   int testValue = 1;
   bool reply = testservice.useAbility(testValue);
-  std::cout << "Greeter received: " << reply << std::endl;
+  std::cout << "UseAbility result: " << reply << std::endl;
 
   return 0;
 }
